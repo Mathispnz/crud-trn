@@ -1,0 +1,19 @@
+{
+  "name": "rehea100220",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mathispnz/rehea100220.git"
+  },
+  "author": "Mathis Peingnez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mathispnz/rehea100220/issues"
+  },
+  "homepage": "https://github.com/Mathispnz/rehea100220#readme"
+}
