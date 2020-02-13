@@ -7,15 +7,11 @@ export default class AddPainting extends Component {
         super(props);
         this.state = {
           title: '',
-          name: '',
           date: '',
           place: '',
-          imageUrl: ''
+          imageUrl: '',
+          listPaintings: []
         };
-    
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleSubmit = this.handleFileUpload.bind(this);
       };
     
       handleChange(event) {
@@ -41,10 +37,10 @@ export default class AddPainting extends Component {
             imageUrl: this.state.imageUrl
         };
 
-        axios.post('http://localhost:5000/api/paintings/create', painting)
+        axios.post('http://localhost:5000/api/paintings/create', this.state)
         .then(res => {
             // console.log('added', res.data);
-
+            this.getAllPaintings();
             this.setState({
                 title: '',
                 place: '',
@@ -54,19 +50,24 @@ export default class AddPainting extends Component {
         .catch(err => {
             console.log("Error while adding the thing: ", err)
         });
-
-        // const { title, name, date, place, imageUrl } = this.state;
-    
-        // axios.post('http://localhost:5000/api/paintings/create', this.state)
-        // .then(res => {
-        //     console.log(res);
-        //     this.setState({title, name, date, place, imageUrl});
-        //     // res.data;
-        // //   res.data;
-        //     // res.redirect('/');
-        // })
-        // .catch(err => console.log(err));
       };
+
+      getAllPaintings = () => {
+          axios.get('http://localhost:5000/api/paintings')
+          .then(res => {
+              this.setState({
+                listPaintings: res.data
+              })
+              console.log(this.state.listPaintings)
+          })
+          .catch(err => {
+              console.log('An error ocurred when retrieving data', err)
+          });
+      }
+
+      componentDidMount() {
+          this.getAllPaintings();
+      }
 
     render() {
         const { imageUrl } = this.state;
@@ -76,9 +77,6 @@ export default class AddPainting extends Component {
                     Add a painting<br />
                     <label>
                         Title: <input type="text" name="title" value={this.state.title} onChange={e => this.handleChange(e)} />
-                    </label><br />
-                    <label>
-                        Name: <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)} />
                     </label><br />
                     <label>
                         Date: <input type="text" name="date" value={this.state.date} onChange={e => this.handleChange(e)} />
@@ -92,7 +90,14 @@ export default class AddPainting extends Component {
                 <img src={imageUrl} />
 
                 <div className="allPaintings">
-                    
+                    {this.state.listPaintings.map(painting => {
+                        return(
+                            <div key={painting._id}>
+                                <h2>{painting.title}</h2>
+                                <img src={painting.imageUrl} />
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         )

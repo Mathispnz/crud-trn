@@ -6,7 +6,7 @@ const Painting = require('../models/Painting');
 router.get('/paintings', (req, res, next) => {
     Painting.find()
     .then(allPaintings => {
-        console.log(allPaintings);
+        // console.log(allPaintings);
         res.json(allPaintings);
     })
     .catch(err => {
@@ -15,7 +15,7 @@ router.get('/paintings', (req, res, next) => {
 });
 
 router.post('/paintings/create', (req, res, next) => {
-    console.log('body :', req.body);
+    // console.log('body :', req.body);
     // const { title, author, place, imageUrl } = req.body;
 
     // const newPainting = new Painting({title, author, place, imageUrl});
