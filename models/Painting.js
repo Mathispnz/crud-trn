@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const PaintingSchema = new Schema({
     title: String,
     author: String,
-    date: Date,
     place: String,
     imageUrl: String
 });

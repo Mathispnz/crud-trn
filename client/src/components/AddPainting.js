@@ -35,10 +35,21 @@ export default class AddPainting extends Component {
     
       handleSubmit(event) {
         event.preventDefault();
+        const painting = {
+            title: this.state.title,
+            place: this.state.place,
+            imageUrl: this.state.imageUrl
+        };
 
-        service.saveNewThing(this.state)
+        axios.post('http://localhost:5000/api/paintings/create', painting)
         .then(res => {
-            console.log('added', res);
+            // console.log('added', res.data);
+
+            this.setState({
+                title: '',
+                place: '',
+                imageUrl: ''
+            })
         })
         .catch(err => {
             console.log("Error while adding the thing: ", err)
@@ -79,6 +90,10 @@ export default class AddPainting extends Component {
                     <button>Save new painting</button>
                 </form>
                 <img src={imageUrl} />
+
+                <div className="allPaintings">
+                    
+                </div>
             </div>
         )
     }
