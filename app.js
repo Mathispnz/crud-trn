@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Painting = require('./models/Painting');
 const cors = require('cors');
-const io = require('socketio.io');
+const io = require('socket.io');
 
 const PORT = 5000;
 
@@ -45,12 +45,12 @@ app.use('/', require('./routes/index'));
 app.use('/api', require('./routes/paintings'));
 app.use('/api', require('./routes/file-upload-routes'));
 
-io.on('connection', (socket) => {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', (data) => {
-        console.log(data)
-    })
-});
+// io.on('connection', (socket) => {
+//     socket.emit('news', { hello: 'world' });
+//     socket.on('my other event', (data) => {
+//         console.log(data)
+//     })
+// });
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
