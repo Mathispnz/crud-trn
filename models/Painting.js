@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PaintingSchema = new Schema({
     title: String,
-    author: String,
+    date: String,
     place: String,
     imageUrl: String
 });

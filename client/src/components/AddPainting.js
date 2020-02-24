@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import service from '../api/service';
 const axios = require('axios');
 
@@ -58,7 +58,6 @@ export default class AddPainting extends Component {
               this.setState({
                 listPaintings: res.data
               })
-              console.log(this.state.listPaintings)
           })
           .catch(err => {
               console.log('An error ocurred when retrieving data', err)
@@ -88,17 +87,6 @@ export default class AddPainting extends Component {
                     <button>Save new painting</button>
                 </form>
                 <img src={imageUrl} />
-
-                <div className="allPaintings">
-                    {this.state.listPaintings.map(painting => {
-                        return(
-                            <div key={painting._id}>
-                                <h2>{painting.title}</h2>
-                                <img src={painting.imageUrl} />
-                            </div>
-                        )
-                    })}
-                </div>
             </div>
         )
     }
